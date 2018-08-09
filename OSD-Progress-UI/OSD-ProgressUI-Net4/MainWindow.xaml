@@ -1,0 +1,162 @@
+﻿<controls:MetroWindow x:Class="OSD_ProgressUI_Net4.MainWindow"
+        xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OSD_ProgressUI_Net4"
+        mc:Ignorable="d"
+        Loaded="Window_Loaded"
+        Title="MainWindow" WindowStartupLocation="CenterScreen" WindowState="Maximized" >
+    <Grid Style="{StaticResource Style_Grid_Main}" >
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="2.2*"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Canvas>
+            <Button x:Name="Button_Password" Click="Button_Password_Click" Margin="10,10,0,0" Style="{x:Null}" Width="35" Height="35" Background="Transparent" BorderBrush="Transparent" Canvas.Left="10" Canvas.Top="10" Grid.ColumnSpan="2" Grid.Row="0">
+                <Button.Content>
+                    <iconPacks:PackIconMaterial Kind="DotsVertical" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </Button.Content>
+            </Button>
+            <StackPanel Canvas.Left="40" Canvas.Top="40">
+                <Button x:Name="Button_PowerShell" Click="Button_PowerShell_Click" Style="{x:Null}" Width="30" Height="30" Background="Transparent" BorderBrush="Transparent" Visibility="Hidden" IsEnabled="False" >
+                    <iconPacks:PackIconMaterial Kind="ConsoleLine" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </Button>
+                <Separator x:Name="Seperator_Tools" Visibility="Hidden"/>
+                <Button x:Name="Button_CMTrace" Click="Button_CMTrace_Click" Style="{x:Null}" Width="30" Height="30" Background="Transparent" BorderBrush="Transparent" Visibility="Hidden" IsEnabled="False" >
+                    <iconPacks:PackIconMaterial Kind="BookOpenVariant" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </Button>
+            </StackPanel>
+        </Canvas>
+        <controls:Flyout x:Name="Flyout_Password" Header="Lösenord" Position="Left" IsOpen="False" Theme="Light">
+            <Grid VerticalAlignment="Top" Height="Auto">
+                <StackPanel>
+                    <PasswordBox x:Name="PasswordBox_Tools" Background="Transparent" Margin="5" controls:TextBoxHelper.ClearTextButton="True" controls:TextBoxHelper.Watermark="Ange lösenordet"/>
+                    <Button x:Name="Button_Flyout_Password" Click="Button_Flyout_Password_Click" Margin="5" Height="30" >
+                        <iconPacks:PackIconMaterial Kind="ArrowRight" />
+                    </Button>
+                </StackPanel>
+                
+            </Grid>
+            
+        </controls:Flyout>
+        <!-- GRID OSD LABEL -->
+        <Grid Grid.Row="0" Grid.Column="1">
+            <!-- ROW DEFINITIONS -->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <!-- BORDER - TS TITLE LABEL -->
+            <Border Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Style="{StaticResource Style_Border_Label}">
+                <Viewbox>
+                    <TextBlock x:Name="Label_TS_Name" Text="Installation av Windows 10 Egen" />
+                </Viewbox>
+            </Border>
+            <!-- BORDER - SUB INFORMATION LABEL -->
+            <Border Style="{StaticResource Style_Border_Label}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" BorderThickness="0 0 0 1">
+                <Viewbox Height="30">
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top">
+                        <!-- Windows Version -->
+                        <iconPacks:PackIconMaterial Kind="Windows" />
+                        <TextBlock x:Name="Label_TS_Windows" Margin="5 0 0 0" />
+                        <Ellipse Margin=" 5 0 5 0"/>
+                        <!-- Office Version -->
+                        <iconPacks:PackIconMaterial Kind="Office" />
+                        <TextBlock x:Name="Label_TS_Office" Margin="5 0 0 0" />
+                        <Ellipse Margin="5 0 5 0"/>
+                        <!-- Organization -->
+                        <iconPacks:PackIconMaterial Kind="AccountMultiple" />
+                        <TextBlock x:Name="Label_TS_Role" Margin="5 0 0 0" />
+                    </StackPanel>
+                </Viewbox>
+            </Border>
+        </Grid>
+        <!-- GRID ROWSPAN 3 COLUMN 3 - AKA TS STAGES -->
+        <Grid x:Name="Grid_AKA_Stages" Grid.Row="1" Grid.RowSpan="2" Grid.Column="2" >
+            <Viewbox Margin="10" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <!-- Prepearing installation -->
+                    <Label x:Name="label_Progress_1" Content="Förbereder installationen" Foreground="#f39c12" FontSize="16"/>
+                    <!-- Configure BIOS -->
+                    <Label x:Name="label_Progress_2" Content="Konfigurerar BIOS" Foreground="Gray" FontSize="12"/>
+                    <!-- Install OS -->
+                    <Label x:Name="label_Progress_3" Content="Installerar operativsystemet" Foreground="Gray" FontSize="12"/>
+                    <!-- Install drivers -->
+                    <Label x:Name="label_Progress_4" Content="Installerar drivrutinerna" Foreground="Gray" FontSize="12"/>
+                    <!-- Prepare OS -->
+                    <Label x:Name="label_Progress_5" Content="Förbereder operativsystemet" Foreground="Gray" FontSize="12"/>
+                    <!-- Install Apps -->
+                    <Label x:Name="label_Progress_6" Content="Installerar applikationerna" Foreground="Gray" FontSize="12"/>
+                    <!-- Finish the installation -->
+                    <Label x:Name="label_Progress_7" Content="Avslutar installationen" Foreground="Gray" FontSize="12"/>
+                </StackPanel>
+            </Viewbox>
+        </Grid>
+        <!-- GRID ROW 1 COLUMN 1 - AKA PROGRESS -->
+        <Grid Grid.Row="1" Grid.Column="1" Margin="10 0 10 0">
+            <Border>
+                <Grid>
+                    <controls:MetroProgressBar x:Name="pbCalculationProgress" BorderThickness="1" BorderBrush="LightBlue" Height="30" Value="0" Foreground="#FF41AC41" Maximum="100" />
+                    <Label x:Name="Label_ProgressUI_Percent" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Medium"/>
+                </Grid>
+            </Border>
+
+        </Grid>
+        <!-- GRID ROW 2 COLUMN 1 - AKA CURRENT STEP-->
+        <Grid Grid.Row="2" Grid.Column="1">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="2">
+                <iconPacks:PackIconMaterial Kind="ClipboardCheck" VerticalAlignment="Center" Width="22" Height="22"/>
+                <Label x:Name="Label_TS_CurrentStep" FontSize="22" Margin="5 0 0 0" />
+            </StackPanel>
+        </Grid>
+
+        <!-- GRID ROW 1 COLUMN 0 - AKA COMPUTER INFO -->
+        <Grid Grid.Row="1" Grid.RowSpan="2" Grid.Column="0">
+            <Viewbox Margin="10" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                <StackPanel Orientation="Vertical">
+                    <!-- Computer Name -->
+                    <StackPanel Orientation="Horizontal">
+                        <iconPacks:PackIconMaterial Kind="Monitor" Width="40" Height="40" />
+                        <Label x:Name="Label_Device_ComputerName" Style="{DynamicResource Style_Label_PCInfo}" />
+                    </StackPanel>
+                    <!-- Computer Model -->
+                    <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
+                        <iconPacks:PackIconMaterial Kind="LaptopWindows" Width="40" Height="40" />
+                        <Label x:Name="Label_Device_ComputerModel" Style="{DynamicResource Style_Label_PCInfo}" />
+                    </StackPanel>
+                    <!-- Serial Number -->
+                    <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
+                        <iconPacks:PackIconMaterial Kind="Numeric" Width="40" Height="40"  />
+                        <Label x:Name="Label_Device_SerialNumber" Style="{DynamicResource Style_Label_PCInfo}" />
+                    </StackPanel>
+                    <!-- Adapter Name-->
+                    <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
+                        <iconPacks:PackIconMaterial Kind="Network" Width="40" Height="40" />
+                        <Label x:Name="Label_Device_NicName" Style="{DynamicResource Style_Label_PCInfo}" />
+                    </StackPanel>
+                    <!-- IP-address -->
+                    <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
+                        <iconPacks:PackIconMaterial Kind="AccessPointNetwork" Width="40" Height="40" />
+                        <Label x:Name="Label_Device_IP" Style="{DynamicResource Style_Label_PCInfo}" />
+                    </StackPanel>
+                    <!-- MAC-address -->
+                    <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
+                        <iconPacks:PackIconMaterial Kind="Barcode" Width="40" Height="40" />
+                        <Label x:Name="Label_Device_Mac" Style="{DynamicResource Style_Label_PCInfo}" />
+                    </StackPanel>
+
+                </StackPanel>
+            </Viewbox>
+        </Grid>
+    </Grid>
+
+</controls:MetroWindow>
